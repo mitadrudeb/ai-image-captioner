@@ -57,12 +57,11 @@ The Gradio app will launch at `http://127.0.0.1:7860`.
 
 ## 📸 How It Works
 
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────┐
-│  Image       │ ──► │  Processor    │ ──► │  AI Model    │ ──► │  Caption  │
-│  (upload/url)│     │  (resize,     │     │  (BLIP or    │     │  (text)   │
-│              │     │   normalize)  │     │   Florence)  │     │           │
-└─────────────┘     └──────────────┘     └─────────────┘     └──────────┘
+```mermaid
+flowchart LR
+    A["🖼️ Image\n(upload / URL)"] --> B["⚙️ Processor\n(resize, normalize)"]
+    B --> C["🤖 AI Model\n(BLIP or Florence-2)"]
+    C --> D["📝 Caption\n(text output)"]
 ```
 
 ### Upload Mode
@@ -73,7 +72,7 @@ The Gradio app will launch at `http://127.0.0.1:7860`.
 ### URL Mode
 1. User pastes a webpage URL
 2. BeautifulSoup scrapes all `<img>` tags from the HTML
-3. Each image is downloaded, filtered (skip SVGs, tiny icons)
+3. Each image is downloaded and filtered (skips SVGs and tiny icons)
 4. The selected model captions each valid image
 5. All captions are displayed in a formatted output
 
